@@ -181,7 +181,7 @@ public class UdfScalarFunction extends ScalarFunction {
                     connect.rollback();
                     logger.info("Begin to retry after 1000ms. Times: " + retryCount++);
                     if (retryTimes != -1 && retryCount > retryTimes) {
-                        return 0;
+                        throw new RuntimeException("Execute job failed after " + retryTimes + " retries.");
                     }
                     Thread.sleep(1000);
                 }
